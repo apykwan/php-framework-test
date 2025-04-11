@@ -6,6 +6,11 @@ include __DIR__ . '/../../vendor/autoload.php';
 
 use Framework\App;
 
-$app = new App();
+$app = new App;
+
+$app->get('/');
+
+
+dd($app);
 
 return $app;
