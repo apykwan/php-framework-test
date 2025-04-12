@@ -1,0 +1,6 @@
+{
+  "editor.fontSize": 17,
+  "[php]": {
+    "editor.formatOnSave": true
+  }
+}
