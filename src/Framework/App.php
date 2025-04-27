@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Framework;
 
-class App 
+class App
 {
   private Router $router;
 
@@ -20,8 +20,10 @@ class App
     $this->router->dispatch($path, $method);
   }
 
-  public function get(string $path, array $controller) 
+  // $app->get('/', [HomeController::class, 'home']);
+  public function get(string $path, array $controller)
   {
+    // public function add(string $method, string $path, array $controller)
     $this->router->add('GET', $path, $controller);
   }
 }
