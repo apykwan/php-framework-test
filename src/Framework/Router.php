@@ -37,7 +37,24 @@ class Router
 
       [$class, $function] = $route['controller'];
       $conrtollerInstance = $container ? $container->resolve($class) : new $class;
-      $conrtollerInstance->$function();
+      // $conrtollerInstance->$function();
+
+      // Full middleware execution chain
+      // Run the middlewares first before the controller function
+      $action = fn() => $conrtollerInstance->$function();
+
+      foreach ($this->middlewares as $middleware) {
+        $middlewareInstance = $container ? $container->resolve($middleware) : new $middleware;
+        $action = fn() => $middlewareInstance->process($action);
+      }
+
+      $action();
+      return;
     }
+  }
+
+  public function addMiddleware(string $middleware)
+  {
+    $this->middlewares[] = $middleware;
   }
 }

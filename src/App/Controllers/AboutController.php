@@ -15,6 +15,6 @@ class AboutController
     $data = [
       'title' => 'About Page'
     ];
-    echo $this->view->render("/about.php", $data);
+    echo $this->view->render("/about.php");
   }
 }
