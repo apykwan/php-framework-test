@@ -7,6 +7,8 @@ namespace Framework;
 class Router
 {
   private array $routes = [];
+  private array $middlewares = [];
+
   public function add(string $method, string $path, array $controller)
   {
     $path = $this->normalizePath($path);
@@ -31,9 +33,6 @@ class Router
     $method = strtoupper($method);
 
     foreach ($this->routes as $route) {
-      // echo '<pre>';
-      // print_r($route);
-      // echo '</pre>';
       if (!preg_match("#^{$route['path']}$#", $path) || $route['method'] !== $method) continue;
 
       [$class, $function] = $route['controller'];

@@ -33,4 +33,9 @@ class App
     // public function add(string $method, string $path, array $controller)
     $this->router->add('GET', $path, $controller);
   }
+
+  public function addMiddleware(string $middleware)
+  {
+    $this->router->addMiddleware($middleware);
+  }
 }

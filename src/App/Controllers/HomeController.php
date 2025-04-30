@@ -8,7 +8,6 @@ use Framework\TemplateEngine;
 
 class HomeController
 {
-
   public function __construct(private TemplateEngine $view) {}
 
   public function home()
