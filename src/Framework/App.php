@@ -11,8 +11,8 @@ class App
 
   public function __construct(string | null $containerDefinitionsPath = null)
   {
-    $this->router = new Router();
-    $this->container = new Container();
+    $this->router = new Router;
+    $this->container = new Container;
 
     if ($containerDefinitionsPath) {
       $containerDefinitions = include $containerDefinitionsPath;
@@ -32,6 +32,11 @@ class App
   {
     // public function add(string $method, string $path, array $controller)
     $this->router->add('GET', $path, $controller);
+  }
+
+  public function post(string $path, array $controller)
+  {
+    $this->router->add('POST', $path, $controller);
   }
 
   public function addMiddleware(string $middleware)
