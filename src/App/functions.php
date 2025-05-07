@@ -14,3 +14,10 @@ function e($value): string
 {
   return htmlspecialchars($value);
 }
+
+function redirectTo(string $path)
+{
+  header("Location: {$path}");
+  http_Response_code(302);
+  exit;
+}

@@ -36,8 +36,8 @@ class Container
     $dependencies = [];
 
     foreach ($params as $param) {
-      $name = $param->getName();
-      $type = $param->getType();
+      $name = $param->getName();    // output => view
+      $type = $param->getType();    // output =>  Framework\TemplateEnginetype Object
 
       if (!$type) {
         throw new ContainerException("Failed to resolve class {$className} because param {$name} is missing a type hint.");
@@ -47,7 +47,7 @@ class Container
         throw new ContainerException("Failed to resolve class {$className} because invalid param name.");
       }
 
-      $dependencies[] = $this->get($type->getName());
+      $dependencies[] = $this->get($type->getName());   // $type->getName() output => Framework\TemplateEnginetype
     }
 
     return $reflectionClass->newInstanceArgs($dependencies);

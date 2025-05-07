@@ -12,9 +12,6 @@ class HomeController
 
   public function home()
   {
-    $data = [
-      'title' => 'Home Page'
-    ];
     echo $this->view->render("/index.php");
   }
 }
