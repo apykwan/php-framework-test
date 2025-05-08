@@ -6,15 +6,15 @@ namespace Framework\Rules;
 
 use Framework\Contracts\RuleInterface;
 
-class RequiredRule implements RuleInterface
+class SocialMediaRule implements RuleInterface
 {
   public function validate(array $data, string $field, array $params): bool
   {
-    return !empty($data[$field]);
+    return (bool) filter_var($data[$field], FILTER_VALIDATE_URL);
   }
 
   public function getMessage(array $data, string $field, array $params): string
   {
-    return "This field is required";
+    return "Invalid URL";
   }
 }
