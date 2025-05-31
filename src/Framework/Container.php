@@ -65,7 +65,7 @@ class Container
 
     // Singleton pattern to avoid re-instantiate the class
     $factory = $this->definitions[$id];
-    $dependency = $factory();
+    $dependency = $factory($this);
 
     $this->resolved[$id] = $dependency;
 

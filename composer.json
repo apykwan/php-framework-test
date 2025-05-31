@@ -11,7 +11,7 @@
             "App\\": "src/App"
         },
         "files": [
-            "src/App/config/Routes.php",
+            "src/App/Config/Routes.php",
             "src/App/Config/Middleware.php"
         ]
     },

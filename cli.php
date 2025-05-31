@@ -20,5 +20,3 @@ $config = [
 $db = new Database($driver, $config, $username, $password);
 
 $sqlFile = file_get_contents(__DIR__ . "/database.sql");
-
-$db->connection->query($sqlFile);
