@@ -42,4 +42,14 @@ class Database
   {
     return $this->stmt->fetchColumn();
   }
+
+  public function fetch(): array|false
+  {
+    return $this->stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function fetchAll(): array
+  {
+    return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

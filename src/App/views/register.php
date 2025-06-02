@@ -131,6 +131,4 @@
   </form>
 </section>
 
-<?php var_dump($oldFormData); ?>
-
 <?php include $this->resolve("partials/_footer.php"); ?>

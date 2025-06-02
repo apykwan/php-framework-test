@@ -17,6 +17,10 @@ class Validator
     $this->rules[$alias] = $rule;
   }
 
+  // $this->validator->validate($formData, [
+  //   'email' => ['required', 'email'],
+  //   'password' => ['required', 'min:4'],
+  // ]);
   public function validate(array $formData, array $fields)
   {
     $errors = [];
