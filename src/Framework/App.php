@@ -28,19 +28,28 @@ class App
   }
 
   // $app->get('/', [HomeController::class, 'home']);
-  public function get(string $path, array $controller)
+  public function get(string $path, array $controller): App
   {
     // public function add(string $method, string $path, array $controller)
     $this->router->add('GET', $path, $controller);
+
+    return $this;
   }
 
-  public function post(string $path, array $controller)
+  public function post(string $path, array $controller): App
   {
     $this->router->add('POST', $path, $controller);
+
+    return $this;
   }
 
   public function addMiddleware(string $middleware)
   {
     $this->router->addMiddleware($middleware);
+  }
+
+  public function add(string $middleware)
+  {
+    $this->router->addRouteMiddleware($middleware);
   }
 }

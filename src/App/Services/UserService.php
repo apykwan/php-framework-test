@@ -62,13 +62,20 @@ class UserService
       'email' => $formData['email']
     ];
 
-    $user = $this->db->query($sql, $params)->fetch();
-    if (!$user) {
+    $user = $this->db->query($sql, $params)->find();
+    if (!$user || !password_verify($formData['password'], $user['password'])) {
       throw new ValidationException(['password' => ['Incorrect email or password']]);
     }
 
-    if (!password_verify($formData['password'], $user['password'])) {
-      throw new ValidationException(['password' => ['Incorrect email or password']]);
-    }
+    session_regenerate_id();
+
+    $_SESSION['user'] = $user['id'];
+  }
+
+  public function logout()
+  {
+    unset($_SESSION['user']);
+
+    session_regenerate_id();
   }
 }

@@ -18,7 +18,8 @@ class Database
 
     $options = [
       PDO::ATTR_PERSISTENT => true,
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ];
 
     try {
@@ -43,13 +44,13 @@ class Database
     return $this->stmt->fetchColumn();
   }
 
-  public function fetch(): array|false
+  public function find(): array|false
   {
-    return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    return $this->stmt->fetch();
   }
 
-  public function fetchAll(): array
+  public function findAll(): array
   {
-    return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $this->stmt->fetchAll();
   }
 }

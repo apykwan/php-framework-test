@@ -9,7 +9,7 @@ use App\Middleware\{
   TemplateDataMiddleware,
   ValidationExceptionMiddleware,
   SessionMiddleware,
-  FlashMiddleware
+  FlashMiddleware,
 };
 
 function registerMiddleware(App $app)
