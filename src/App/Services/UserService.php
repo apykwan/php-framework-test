@@ -45,6 +45,8 @@ class UserService
 
     try {
       $this->db->query($sql, $params);
+      session_regenerate_id();
+      $_SESSION['user'] = $this->db->id();
     } catch (\Exception $e) {
       echo "Registration failed: " . $e->getMessage();
     }

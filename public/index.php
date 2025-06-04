@@ -29,7 +29,10 @@ include __DIR__ . '/../cli.php';
 
 
 
-// middlewares calling under the hood
+/** 
+ * Middlewares calling under the hood
+ * */
+
 // $middlewares = [
 //   function ($next) {
 //     echo "A <br>";
@@ -49,8 +52,8 @@ include __DIR__ . '/../cli.php';
 //   echo "Main Content <br>";
 // };
 
-// foreach ($middlewares as $function) {
-//   $a = fn() => $function($a);
+// foreach ($middlewares as $mid) {
+//   $a = fn() => $mid($a);
 // }
 
 // $a();
