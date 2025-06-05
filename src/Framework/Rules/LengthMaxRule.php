@@ -7,7 +7,7 @@ namespace Framework\Rules;
 use Framework\Contracts\RuleInterface;
 use InvalidArgumentException;
 
-class PassLengthRule implements RuleInterface
+class lengthMaxRule implements RuleInterface
 {
   public function validate(array $data, string $field, array $params): bool
   {
@@ -17,11 +17,11 @@ class PassLengthRule implements RuleInterface
 
     $length = (int) $params[0];
 
-    return strlen($data[$field]) >= $length;
+    return strlen($data[$field]) < $length;
   }
 
   public function getMessage(array $data, string $field, array $params): string
   {
-    return "Password must be at least {$params[0]} characters long";
+    return "Exceeds maximum character limit of {$params[0]} characters";
   }
 }
