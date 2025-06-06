@@ -6,7 +6,7 @@ include __DIR__ . '/../../vendor/autoload.php';
 
 
 use Framework\App;
-use App\Config\paths;
+use App\Config\Paths;
 use function App\Config\{registerRoutes, registerMiddleware};
 use Dotenv\Dotenv;
 
