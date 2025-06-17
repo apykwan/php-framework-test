@@ -46,6 +46,15 @@ class TransactionService
 
     $transactions = $this->db->query($sql, $params)->findAll();
 
-    return $transactions;
+    $sql = <<<SQL
+    SELECT COUNT(*)
+    FROM transactions 
+    WHERE user_id = :user_id
+    AND description LIKE :description
+    SQL;
+
+    $transactionCount = $this->db->query($sql, $params)->count();
+
+    return [$transactions, $transactionCount];
   }
 }
