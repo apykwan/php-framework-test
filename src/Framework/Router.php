@@ -12,11 +12,15 @@ class Router
   public function add(string $method, string $path, array $controller)
   {
     $path = $this->normalizePath($path);
+
+    $regexPath = preg_replace('#{[^/]+}#', '([^/]+)', $path);
+
     $this->routes[] = [
       'path' => $path,
       'method' => strtoupper($method),
       'controller' => $controller,
-      'middlewares' => []
+      'middlewares' => [],
+      'regexPath' => $regexPath
     ];
   }
 
@@ -31,17 +35,26 @@ class Router
   public function dispatch(string $path, string $method, Container | null $container = null)
   {
     $path = $this->normalizePath($path);
-    $method = strtoupper($method);
+    $method = strtoupper($_POST['_METHOD'] ?? $method);
 
     foreach ($this->routes as $route) {
-      if (!preg_match("#^{$route['path']}$#", $path) || $route['method'] !== $method) continue;
+      if (
+        !preg_match("#^{$route['regexPath']}$#", $path, $paramValues) ||
+        $route['method'] !== $method
+      ) {
+        continue;
+      }
+
+      print_r($paramValues);
+
+      array_shift($paramValues);
 
       [$class, $function] = $route['controller'];
       $conrtollerInstance = $container ? $container->resolve($class) : new $class;
 
       // Full middleware execution chain
       // Run the middlewares first before the controller function
-      $action = fn() => $conrtollerInstance->$function();
+      $action = fn() => $conrtollerInstance->{$function}($paramValues);
 
       $allMiddlewares = [...$route['middlewares'], ...$this->middlewares];
 
