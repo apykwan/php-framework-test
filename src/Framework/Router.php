@@ -45,16 +45,19 @@ class Router
         continue;
       }
 
-      print_r($paramValues);
-
       array_shift($paramValues);
+
+      preg_match_all('#{([^/]+)}#', $route['path'], $paramKeys);
+      $paramKeys = $paramKeys[1];
+
+      $params = array_combine($paramKeys, $paramValues);
 
       [$class, $function] = $route['controller'];
       $conrtollerInstance = $container ? $container->resolve($class) : new $class;
 
       // Full middleware execution chain
       // Run the middlewares first before the controller function
-      $action = fn() => $conrtollerInstance->{$function}($paramValues);
+      $action = fn() => $conrtollerInstance->{$function}($params);
 
       $allMiddlewares = [...$route['middlewares'], ...$this->middlewares];
 
