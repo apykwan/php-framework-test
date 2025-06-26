@@ -52,4 +52,11 @@ class TransactionController
     $path = $_SERVER['HTTP_REFERER'] ?? '/';
     redirectTo($path);
   }
+
+  public function delete(array $params)
+  {
+    $this->transactionService->delete((int) $params['transaction']);
+
+    redirectTo('/');
+  }
 }

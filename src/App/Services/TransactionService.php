@@ -94,4 +94,19 @@ class TransactionService
 
     $this->db->query($sql, $params);
   }
+
+  public function delete(int $id)
+  {
+    $sql = <<<SQL
+    DELETE FROM transactions
+    WHERE id = :id AND user_id = :user_id
+    SQL;
+
+    $params = [
+      'id' => $id,
+      'user_id' => $_SESSION['user']
+    ];
+
+    $this->db->query($sql, $params);
+  }
 }

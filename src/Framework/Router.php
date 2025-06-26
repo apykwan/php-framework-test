@@ -39,11 +39,10 @@ class Router
 
     foreach ($this->routes as $route) {
       if (
+        //  /transaction/{transaction}
         !preg_match("#^{$route['regexPath']}$#", $path, $paramValues) ||
         $route['method'] !== $method
-      ) {
-        continue;
-      }
+      ) continue;
 
       array_shift($paramValues);
 
