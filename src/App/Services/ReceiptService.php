@@ -71,4 +71,15 @@ class ReceiptService
 
     $this->db->query($sql, $params);
   }
+
+  public function getReceipt(string $id)
+  {
+    $sql = <<<SQL
+    SELECT * FROM receipts WHERE id = :id
+    SQL;
+
+    $param = ['id' => $id];
+
+    return $this->db->query($sql, $param)->find();
+  }
 }

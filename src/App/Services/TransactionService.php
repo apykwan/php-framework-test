@@ -46,6 +46,17 @@ class TransactionService
 
     $transactions = $this->db->query($sql, $params)->findAll();
 
+    $transactions = array_map(function (array $transaction) {
+      $sql = <<<SQL
+      SELECT * FROM receipts WHERE transaction_id = :transaction_id
+      SQL;
+
+      $param = ['transaction_id' => $transaction['id']];
+
+      $transaction['receipts'] = $this->db->query($sql, $param)->findAll();
+      return $transaction;
+    }, $transactions);
+
     $sql = <<<SQL
     SELECT COUNT(*)
     FROM transactions 
