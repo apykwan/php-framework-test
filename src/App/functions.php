@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Framework\Http;
+
 function dd(mixed $value)
 {
   echo '<pre>';
@@ -18,6 +20,6 @@ function e($value): string
 function redirectTo(string $path)
 {
   header("Location: {$path}");
-  http_Response_code(302);
+  http_Response_code(Http::REDIRECT_STATUS_CODE);
   exit;
 }
